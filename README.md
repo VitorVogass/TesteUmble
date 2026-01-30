@@ -1,80 +1,148 @@
-Desafio Umbler
-Esta È uma aplicaÁ„o web que recebe um domÌnio e mostra suas informaÁıes de DNS.
 
-Este È um exemplo real de sistema que utilizamos na Umbler.
+# Desafio Umbler
 
-Ex: Consultar os dados de registro do dominio umbler.com
+Esta √© uma aplica√ß√£o web que recebe um dom√≠nio e mostra suas informa√ß√µes de DNS.
 
-Retorno:
+Este √© um exemplo real de sistema que utilizamos na Umbler.
 
-Name servers (ns254.umbler.com)
-IP do registro A (177.55.66.99)
-Empresa que est· hospedado (Umbler)
-Essas informaÁıes s„o descobertas atravÈs de consultas nos servidores DNS e de WHOIS.
+Ex: Consultar os dados de registro do dominio `umbler.com`
 
-Obs: WHOIS (pronuncia-se "ruÌs") È um protocolo especÌfico para consultar informaÁıes de contato e DNS de domÌnios na internet.
+**Retorno:**
+- Name servers (ns254.umbler.com)
+- IP do registro A (177.55.66.99)
+- Empresa que est√° hospedado (Umbler)
 
-Nesta aplicaÁ„o, os dados obtidos s„o salvos em um banco de dados, evitando uma segunda consulta desnecessaria, caso seu TTL ainda n„o tenha expirado.
+Essas informa√ß√µes s√£o descobertas atrav√©s de consultas nos servidores DNS e de WHOIS.
 
-Obs: O TTL È um valor em um registro DNS que determina o n˙mero de segundos antes que alteraÁıes subsequentes no registro sejam efetuadas. Ou seja, usamos este valor para determinar quando uma informaÁ„o est· velha e deve ser renovada.
+*Obs: WHOIS (pronuncia-se "ru√≠s") √© um protocolo espec√≠fico para consultar informa√ß√µes de contato e DNS de dom√≠nios na internet.*
+
+Nesta aplica√ß√£o, os dados obtidos s√£o salvos em um banco de dados, evitando uma segunda consulta desnecessaria, caso seu TTL ainda n√£o tenha expirado.
+
+*Obs: O TTL √© um valor em um registro DNS que determina o n√∫mero de segundos antes que altera√ß√µes subsequentes no registro sejam efetuadas. Ou seja, usamos este valor para determinar quando uma informa√ß√£o est√° velha e deve ser renovada.*
 
 Tecnologias Backend utilizadas:
 
-C#
-Asp.Net Core
-MySQL
-Entity Framework
+- C#
+- Asp.Net Core
+- MySQL
+- Entity Framework
+
 Tecnologias Frontend utilizadas:
 
-Webpack
-Babel
-ES7
-Para rodar o projeto vocÍ vai precisar instalar:
+- Webpack
+- Babel
+- ES7
 
-dotnet Core SDK (https://www.microsoft.com/net/download/windows dotnet Core 6.0.201 SDK)
-Um editor de cÛdigo, acoselhamos o Visual Studio ou VisualStudio Code. (https://code.visualstudio.com/)
-NodeJs v17.6.0 para "buildar" o FrontEnd (https://nodejs.org/en/)
-Um banco de dados MySQL (vc pode rodar localmente ou criar um site PHP gratuitamente no app da Umbler https://app.umbler.com/ que lhe oferece o banco Mysql adicionamente)
+Para rodar o projeto voc√™ vai precisar instalar:
+
+- dotnet Core SDK (https://www.microsoft.com/net/download/windows dotnet Core 6.0.201 SDK)
+- Um editor de c√≥digo, acoselhamos o Visual Studio ou VisualStudio Code. (https://code.visualstudio.com/)
+- NodeJs v17.6.0 para "buildar" o FrontEnd (https://nodejs.org/en/)
+- Um banco de dados MySQL (vc pode rodar localmente ou criar um site PHP gratuitamente no app da Umbler https://app.umbler.com/ que lhe oferece o banco Mysql adicionamente)
+
 Com as ferramentas devidamente instaladas, basta executar os seguintes comandos:
 
 Para "buildar" o javascript basta executar:
 
-npm install npm run build
+`npm install`
+`npm run build`
 
 Para Rodar o projeto:
 
 Execute a migration no banco mysql:
 
-dotnet tool update --global dotnet-ef dotnet tool ef database update
+`dotnet tool update --global dotnet-ef`
+`dotnet tool ef database update`
 
-E apÛs:
+E ap√≥s: 
 
-dotnet run (ou clique em "play" no editor do vscode)
+`dotnet run` (ou clique em "play" no editor do vscode)
 
-Objetivos:
-Se vocÍ rodar o projeto e testar um domÌnio, ver· que ele j· est· funcionando. PorÈm, queremos melhorar varios pontos deste projeto:
+# Objetivos:
 
-FrontEnd
-Os dados retornados n„o est„o formatados, e devem ser apresentados de uma forma legÌvel.
-N„o h· validaÁ„o no frontend permitindo que seja submetido uma requsiÁ„o inv·lida para o servidor (por exemplo, um domÌnio sem extens„o).
-Est· sendo utilizado "vanilla-js" para fazer a requisiÁ„o para o backend, apesar de j· estar configurado o webpack. O ideal seria utilizar algum framework mais moderno como ReactJs ou Blazor.
-BackEnd
-N„o h· validaÁ„o no backend permitindo que uma requisiÁ„o inv·lida prossiga, o que ocasiona exceptions (erro 500).
-A complexidade ciclom·tica do controller est· muito alta, o ideal seria utilizar uma arquitetura em camadas.
-O DomainController est· retornando a prÛpria entidade de domÌnio por JSON, o que faz com que propriedades como Id, Ttl e UpdatedAt sejam mandadas para o cliente web desnecessariamente. Retornar uma ViewModel (DTO) neste caso seria mais aconselhado.
-Testes
-A cobertura de testes unit·rios est· muito baixa, e o DomainController est· impossÌvel de ser testado pois n„o h· como "mockar" a infraestrutura.
-O Banco de dados j· est· sendo "mockado" graÁas ao InMemoryDataBase do EntityFramework, mas as consultas ao Whois e Dns n„o.
-Dica
-Este teste n„o tem "pegadinha", È algo pensado para ser simples. Aconselhamos a ler o cÛdigo, e inclusive algumas dicas textuais deixadas nos testes unit·rios.
-H· um teste unit·rio que est· comentado, que obrigatoriamente tem que passar.
-Diferencial: criar mais testes.
-Entrega
-Enviei o link do seu repositÛrio com o cÛdigo atualizado.
-O repositÛrio deve estar p˙blico para que possamos acessar..
-Modifique Este readme adicionando informaÁıes sobre os motivos das mudanÁas realizadas.
-ModificaÁıes:
+Se voc√™ rodar o projeto e testar um dom√≠nio, ver√° que ele j√° est√° funcionando. Por√©m, queremos melhorar varios pontos deste projeto:
 
-O frontend foi totalmente refeito com React, substituindo o HTML e JavaScript puro. A interface agora È composta por componentes reutiliz·veis com Hooks, validaÁ„o de domÌnios antes de enviar requisiÁıes e exibiÁ„o clara dos dados do Whois, incluindo feedback visual de carregamento e mensagens de erro.
+# FrontEnd
 
-No backend, o cÛdigo foi reorganizado em camadas (Presentation, Application, Domain e Infrastructure), com controllers simplificados, injeÁ„o de dependÍncia via interfaces e centralizaÁ„o das regras de negÛcio nas entidades de domÌnio. ServiÁos e adapters gerenciam DNS e Whois, DTOs controlam os dados retornados, e a arquitetura facilita testes unit·rios e manutenÁ„o. Migrations e ferramentas foram ajustadas para garantir consistÍncia e evitar conflitos de vers„o.
+ - Os dados retornados n√£o est√£o formatados, e devem ser apresentados de uma forma leg√≠vel.
+ - N√£o h√° valida√ß√£o no frontend permitindo que seja submetido uma requsi√ß√£o inv√°lida para o servidor (por exemplo, um dom√≠nio sem extens√£o).
+ - Est√° sendo utilizado "vanilla-js" para fazer a requisi√ß√£o para o backend, apesar de j√° estar configurado o webpack. O ideal seria utilizar algum framework mais moderno como ReactJs ou Blazor.  
+
+# BackEnd
+
+ - N√£o h√° valida√ß√£o no backend permitindo que uma requisi√ß√£o inv√°lida prossiga, o que ocasiona exceptions (erro 500).
+ - A complexidade ciclom√°tica do controller est√° muito alta, o ideal seria utilizar uma arquitetura em camadas.
+ - O DomainController est√° retornando a pr√≥pria entidade de dom√≠nio por JSON, o que faz com que propriedades como Id, Ttl e UpdatedAt sejam mandadas para o cliente web desnecessariamente. Retornar uma ViewModel (DTO) neste caso seria mais aconselhado.
+
+# Testes
+
+ - A cobertura de testes unit√°rios est√° muito baixa, e o DomainController est√° imposs√≠vel de ser testado pois n√£o h√° como "mockar" a infraestrutura.
+ - O Banco de dados j√° est√° sendo "mockado" gra√ßas ao InMemoryDataBase do EntityFramework, mas as consultas ao Whois e Dns n√£o. 
+
+# Dica
+
+- Este teste n√£o tem "pegadinha", √© algo pensado para ser simples. Aconselhamos a ler o c√≥digo, e inclusive algumas dicas textuais deixadas nos testes unit√°rios. 
+- H√° um teste unit√°rio que est√° comentado, que obrigatoriamente tem que passar.
+- Diferencial: criar mais testes.
+
+# Entrega
+
+- Enviei o link do seu reposit√≥rio com o c√≥digo atualizado.
+- O reposit√≥rio deve estar p√∫blico para que possamos acessar..
+- Modifique Este readme adicionando informa√ß√µes sobre os motivos das mudan√ßas realizadas.
+
+# Modifica√ß√µes:
+
+# Mudan√ßas no Frontend
+
+Substitu√≠mos a manipula√ß√£o direta do DOM pelo React, deixando o c√≥digo mais organizado e f√°cil de manter.
+
+Interface dividida em componentes reutiliz√°veis, com controle de estado usando Hooks.
+
+Valida√ß√£o de dom√≠nios no frontend, evitando requisi√ß√µes inv√°lidas para o backend.
+
+Dados da API agora s√£o exibidos de forma clara e leg√≠vel, mostrando apenas informa√ß√µes v√°lidas do Whois.
+
+Adicionamos feedback visual de carregamento e mensagens de erro para melhorar a experi√™ncia do usu√°rio.
+
+Removida a l√≥gica baseada em HTML est√°tico e JavaScript puro.
+
+# Mudan√ßas no Backend
+
+C√≥digo reorganizado em camadas (Apresenta√ß√£o, Application, Domain e Infrastructure) para facilitar manuten√ß√£o e reduzir impactos de mudan√ßas.
+
+Controllers ficaram mais simples: s√≥ validam a requisi√ß√£o e delegam a l√≥gica para a camada Application.
+
+Implementada inje√ß√£o de depend√™ncia via interfaces, desacoplando controllers das implementa√ß√µes concretas.
+
+Criado DomainLookupService na camada Application, respons√°vel por consultas e montagem do DTO de resposta.
+
+DTOs na camada Domain evitam o retorno direto de entidades e eliminam dados desnecess√°rios.
+
+Regras de neg√≥cio centralizadas nas entidades de dom√≠nio, como a checagem de expira√ß√£o do TTL.
+
+C√≥digo duplicado de DNS e Whois foi removido, concentrando essas fun√ß√µes em servi√ßos e adapters.
+
+Adapters na camada Infrastructure encapsulam a comunica√ß√£o com servi√ßos externos, facilitando manuten√ß√£o e testes.
+
+Infrastructure organizada entre Data (DbContext, entidades e migrations) e Repositories para acesso a dados.
+
+Sistema mais test√°vel com separa√ß√£o clara entre infraestrutura, dom√≠nio e aplica√ß√£o.
+
+Ajuste no script de migration: ap√≥s a reorganiza√ß√£o, √© preciso rodar dotnet ef database update --project ..\Desafio.Umbler.Infrastructure.
+
+Criado dotnet-tools.json para garantir que todos usem a vers√£o correta do dotnet-ef e evitar conflitos de SDK.
+
+# Mudan√ßas nos Testes
+
+Testes reorganizados seguindo a nova arquitetura em camadas.
+
+Novos testes adicionados para regras importantes, como expira√ß√£o do TTL.
+
+Whois e LookupClient encapsulados em adapters injet√°veis, permitindo testes unit√°rios sem depender de servi√ßos externos.
+
+Chamadas duplicadas de DNS e Whois foram unificadas, reduzindo c√≥digo repetido.
+
+Testes comentados foram ajustados para passar usando mocks, mantendo a valida√ß√£o do comportamento original.
+
+Com a nova estrutura, fica f√°cil adicionar novos testes mantendo consist√™ncia.
